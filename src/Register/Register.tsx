@@ -12,7 +12,7 @@ const Register = () => {
         "data":data
       }
     
-        const res =  await  fetch('http://localhost:3030/std/register', {
+        const res =  await  fetch('https://register-server-five.vercel.app/std/register', {
             method:'post',
             headers: {
                 'Content-Type': 'application/json', // Indicate that the request body is JSON
@@ -21,9 +21,16 @@ const Register = () => {
             
         })
         const result = await res.json()
-        console.log(result)
-    }catch(ex){
+        const {acknowledge , insertedId } = result;
+        if(acknowledge && insertedId ){
+          alert("success")
+        }else{
+          alert("fail")
+        }
+       
+    }catch(ex:any){
         console.error(ex)
+        alert(ex.message)
 
     }
 
